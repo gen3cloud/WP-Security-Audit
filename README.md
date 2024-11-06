@@ -31,7 +31,9 @@ Execute o script:
 No início do script, você pode ajustar as seguintes variáveis:
 
 LOG_FILE: Caminho do arquivo de log.
+
 MAX_PARALLEL_PROCESSES: Número máximo de processos simultâneos.
+
 CRITICAL_FILES: Arquivos que não serão removidos, mesmo que comprometidos.
 
 ## Licença
