@@ -10,6 +10,7 @@ Este script é utilizado para verificar a integridade dos arquivos em sites Word
 - Registra todas as ações no arquivo de log.
 - Possui uma lista de arquivos críticos que não são removidos.
 - Verifica sub-sites associados à conta cPanel.
+- A função verify_and_remove_files agora também verifica se há funções PHP como eval(), base64_decode(), shell_exec(), exec() no diretório do site e em seus sub-sites.
 
 ## Como Usar
 
