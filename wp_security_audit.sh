@@ -7,8 +7,8 @@
 # removendo arquivos comprometidos que não devem existir de acordo com as verificações
 # de integridade do WP (wp core verify-checksums).
 # O script também realiza a execução paralela para otimizar o tempo de execução.
-# Autor: [Seu Nome]
-# Data: [Data]
+# Autor: Vinícius Nascimento
+# Data: 06/11/2024
 # ============================
 
 # ============================
@@ -58,6 +58,19 @@ verify_and_remove_files() {
             log_action "Arquivo preservado: ${path}/${sketch}"
         fi
     done
+
+    # Verificar funções PHP suspeitas
+    echo "Verificando funções PHP suspeitas no diretório $path..."
+    suspicious_functions=$(grep -r -E "eval|base64_decode|shell_exec|exec" "$path")
+    
+    if [[ ! -z "$suspicious_functions" ]]; then
+        echo "Funções PHP suspeitas encontradas:"
+        echo "$suspicious_functions"
+        log_action "Funções PHP suspeitas encontradas no diretório $path"
+        echo "$suspicious_functions" >> $LOG_FILE
+    else
+        echo "Nenhuma função PHP suspeita encontrada."
+    fi
 }
 
 # Função para verificar sites secundários (sub-sites)
@@ -83,6 +96,19 @@ verify_subsites() {
                 log_action "Arquivo preservado: ${subsite_path}/${sketch}"
             fi
         done
+
+        # Verificar funções PHP suspeitas no sub-site
+        echo "Verificando funções PHP suspeitas no sub-site $subsite_path..."
+        suspicious_functions=$(grep -r -E "eval|base64_decode|shell_exec|exec" "$subsite_path")
+        
+        if [[ ! -z "$suspicious_functions" ]]; then
+            echo "Funções PHP suspeitas encontradas no sub-site:"
+            echo "$suspicious_functions"
+            log_action "Funções PHP suspeitas encontradas no sub-site $subsite_path"
+            echo "$suspicious_functions" >> $LOG_FILE
+        else
+            echo "Nenhuma função PHP suspeita encontrada no sub-site."
+        fi
     done
 }
 
@@ -101,4 +127,3 @@ echo "$users" | xargs -I {} -P ${MAX_PARALLEL_PROCESSES} bash -c 'verify_and_rem
 # Gerar relatório
 log_action "Auditoria de segurança concluída: $(date)"
 echo "Auditoria de segurança concluída. Relatório gerado em $LOG_FILE."
-
