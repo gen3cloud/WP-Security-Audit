@@ -13,16 +13,16 @@ Este script é utilizado para verificar a integridade dos arquivos em sites Word
 
 ## Como Usar
 
-**1. Clone este repositório:**
+1. Clone este repositório:
    ```bash
    git clone https://github.com/seu-usuario/wp_security_audit.git
    cd wp_security_audit
    
-**2. Torne o script executável:**
+2. Torne o script executável:
 
 chmod +x wp_security_audit.sh
 
-**Execute o script:**
+Execute o script:
 
 ./wp_security_audit.sh
 
@@ -33,11 +33,7 @@ No início do script, você pode ajustar as seguintes variáveis:
 LOG_FILE: Caminho do arquivo de log.
 MAX_PARALLEL_PROCESSES: Número máximo de processos simultâneos.
 CRITICAL_FILES: Arquivos que não serão removidos, mesmo que comprometidos.
-Licença
+
+## Licença
 
 Este projeto está licenciado sob a Licença MIT.
-
-
-Este arquivo `README.md` fornece todas as informações necessárias para outros usuários entenderem e utilizarem o script. Certifique-se de adicionar o arquivo ao seu repositório GitHub junto com o script!
-
-Se precisar de mais alguma coisa ou quiser fazer outras melhorias, fico à disposição!
